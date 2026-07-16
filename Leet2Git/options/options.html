@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leet2Git — Settings</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <div class="layout">
+    <nav class="sidebar">
+      <div class="sidebar-logo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#FFA116" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M2 17L12 22L22 17" stroke="#FFA116" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M2 12L12 17L22 12" stroke="#FFA116" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+        <span>Leet<span class="accent">2</span>Git</span>
+      </div>
+      <ul class="nav-list">
+        <li><a href="#github" class="nav-item active" data-section="github">GitHub Setup</a></li>
+        <li><a href="#sync"   class="nav-item"        data-section="sync">Sync Settings</a></li>
+        <li><a href="#history" class="nav-item"       data-section="history">History</a></li>
+        <li><a href="#danger" class="nav-item danger-nav" data-section="danger">Danger Zone</a></li>
+      </ul>
+      <div class="sidebar-version">v1.0.0</div>
+    </nav>
+
+    <main class="main">
+
+      <section id="section-github" class="section active">
+        <div class="section-header">
+          <h1 class="section-title">GitHub Setup</h1>
+          <p class="section-desc">Configure your OAuth app credentials and connect your account.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-header">Connect via Personal Access Token <span class="badge-recommended">Recommended</span></div>
+          <div class="card-body">
+            <p class="help-text">
+              Create a token at
+              <a href="https://github.com/settings/tokens/new?scopes=repo&description=Leet2Git" target="_blank">
+                github.com/settings/tokens
+              </a>
+              — select <strong>repo</strong> scope, click <strong>Generate token</strong>, then paste it below.
+            </p>
+
+            <div class="form-group">
+              <label class="label" for="pat-input">Personal Access Token</label>
+              <div class="input-row">
+                <input id="pat-input" class="input" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off" />
+                <button id="btn-toggle-pat" class="btn btn-ghost btn-icon" title="Show/hide">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                </button>
+              </div>
+              <span class="field-hint">Stored only in your browser — never sent to any third-party server.</span>
+            </div>
+
+            <button id="btn-save-pat" class="btn btn-primary">Save &amp; Connect</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">OAuth App (optional — Device Flow)</div>
+          <div class="card-body">
+            <p class="help-text">
+              If you prefer OAuth, create a GitHub OAuth App at
+              <a href="https://github.com/settings/developers" target="_blank">github.com/settings/developers</a>
+              and enter the Client ID below. The Device Flow is used — no client secret or backend required.
+            </p>
+            <div class="form-group">
+              <label class="label" for="client-id">Client ID</label>
+              <input id="client-id" class="input" type="text" placeholder="Ov23li..." autocomplete="off" />
+            </div>
+            <button id="btn-save-credentials" class="btn btn-ghost">Save Client ID</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">Account</div>
+          <div class="card-body">
+            <div id="account-disconnected">
+              <p class="help-text">No GitHub account connected. Use the Personal Access Token above.</p>
+              <button id="btn-connect" class="btn btn-ghost">Connect via Device Flow instead</button>
+            </div>
+            <div id="account-connected" class="hidden">
+              <div class="profile-row">
+                <img id="opt-avatar" class="avatar" src="" alt="avatar" />
+                <div>
+                  <div id="opt-username" class="strong"></div>
+                  <div id="opt-userlogin" class="muted"></div>
+                </div>
+                <button id="btn-disconnect" class="btn btn-ghost btn-sm ml-auto">Disconnect</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="section-sync" class="section">
+        <div class="section-header">
+          <h1 class="section-title">Sync Settings</h1>
+          <p class="section-desc">Configure how and where your solutions are pushed.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-header">Repository</div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="label" for="opt-repo">Target Repository</label>
+              <div class="input-row">
+                <select id="opt-repo" class="select"></select>
+                <button id="btn-refresh-repos" class="btn btn-ghost btn-icon" title="Refresh">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="23 4 23 10 17 10"/>
+                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="label" for="opt-branch">Branch</label>
+              <input id="opt-branch" class="input" type="text" value="main" placeholder="main" />
+              <span class="field-hint">Will be created from default branch if it doesn't exist.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">Folder Structure</div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="label">Path Template</label>
+              <div class="radio-group">
+                <label class="radio-item">
+                  <input type="radio" name="path-template" value="difficulty" checked />
+                  <span class="radio-label">
+                    <code>{difficulty}/{id}-{slug}/{id}-{slug}.{ext}</code>
+                    <span class="muted">e.g. easy/0001-two-sum/0001-two-sum.py</span>
+                  </span>
+                </label>
+                <label class="radio-item">
+                  <input type="radio" name="path-template" value="flat" />
+                  <span class="radio-label">
+                    <code>{id}-{slug}.{ext}</code>
+                    <span class="muted">e.g. 0001-two-sum.py</span>
+                  </span>
+                </label>
+                <label class="radio-item">
+                  <input type="radio" name="path-template" value="language" />
+                  <span class="radio-label">
+                    <code>{language}/{id}-{slug}.{ext}</code>
+                    <span class="muted">e.g. python/0001-two-sum.py</span>
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">Behavior</div>
+          <div class="card-body">
+            <div class="toggle-row">
+              <div>
+                <div class="strong">Auto-sync on acceptance</div>
+                <div class="muted small">Push every accepted solution automatically</div>
+              </div>
+              <label class="toggle">
+                <input id="opt-auto-sync" type="checkbox" checked />
+                <span class="toggle-track"><span class="toggle-thumb"></span></span>
+              </label>
+            </div>
+            <div class="toggle-row">
+              <div>
+                <div class="strong">Update README index</div>
+                <div class="muted small">Maintain a table of all solutions in README.md</div>
+              </div>
+              <label class="toggle">
+                <input id="opt-update-readme" type="checkbox" checked />
+                <span class="toggle-track"><span class="toggle-thumb"></span></span>
+              </label>
+            </div>
+            <div class="toggle-row">
+              <div>
+                <div class="strong">Add problem header comment</div>
+                <div class="muted small">Prepend metadata (title, difficulty, runtime) to each file</div>
+              </div>
+              <label class="toggle">
+                <input id="opt-add-header" type="checkbox" checked />
+                <span class="toggle-track"><span class="toggle-thumb"></span></span>
+              </label>
+            </div>
+            <div class="toggle-row">
+              <div>
+                <div class="strong">Desktop notifications</div>
+                <div class="muted small">Show a notification after each successful sync</div>
+              </div>
+              <label class="toggle">
+                <input id="opt-notifications" type="checkbox" checked />
+                <span class="toggle-track"><span class="toggle-thumb"></span></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <button id="btn-save-sync" class="btn btn-primary">Save Settings</button>
+      </section>
+
+      <section id="section-history" class="section hidden">
+        <div class="section-header">
+          <h1 class="section-title">Sync History</h1>
+          <p class="section-desc">Your last 100 synced solutions.</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div id="h-total" class="stat-big">0</div>
+            <div class="stat-label">Total synced</div>
+          </div>
+          <div class="stat-card">
+            <div id="h-streak" class="stat-big">0</div>
+            <div class="stat-label">Day streak</div>
+          </div>
+          <div class="stat-card">
+            <div id="h-last" class="stat-big">—</div>
+            <div class="stat-label">Last sync</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            Recent Solutions
+            <button id="btn-export" class="btn btn-ghost btn-sm ml-auto">Export JSON</button>
+          </div>
+          <div id="history-list" class="history-list">
+            <div class="empty-state">No solutions synced yet.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="section-danger" class="section hidden">
+        <div class="section-header">
+          <h1 class="section-title">Danger Zone</h1>
+          <p class="section-desc">Irreversible actions — proceed carefully.</p>
+        </div>
+
+        <div class="card danger-card">
+          <div class="card-header">Clear Sync History</div>
+          <div class="card-body">
+            <p class="help-text">Removes all local sync history and resets your stats. Does not affect your GitHub repository.</p>
+            <button id="btn-clear-history" class="btn btn-danger">Clear History</button>
+          </div>
+        </div>
+
+        <div class="card danger-card">
+          <div class="card-header">Reset All Settings</div>
+          <div class="card-body">
+            <p class="help-text">Removes all stored settings, credentials, and data. You will need to reconfigure the extension.</p>
+            <button id="btn-reset-all" class="btn btn-danger">Reset Everything</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+  
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="options.js" type="module"></script>
+</body>
+</html>
