@@ -21,35 +21,6 @@
 
 ---
 
-## File Structure
-
-```
-Leet2Git/
-├── manifest.json
-├── background/
-│   └── background.js        # Service worker — message hub, sync logic
-├── content/
-│   └── content.js           # Intercepts LeetCode submissions
-├── popup/
-│   ├── popup.html
-│   ├── popup.css
-│   └── popup.js             # Quick-access UI
-├── options/
-│   ├── options.html
-│   ├── options.css
-│   └── options.js           # Full settings page
-├── utils/
-│   ├── auth.js              # GitHub OAuth flow
-│   ├── github.js            # GitHub REST API helpers
-│   └── storage.js           # chrome.storage wrappers
-└── icons/
-    ├── icon16.png
-    ├── icon48.png
-    └── icon128.png
-```
-
----
-
 ## Installation
 
 ### Step 1 — Create a GitHub OAuth App
