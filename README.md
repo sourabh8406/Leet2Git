@@ -44,8 +44,6 @@ Create or drop three PNG icons into `Leet2Git/icons/`:
 | `icon48.png` | 48 × 48 px |
 | `icon128.png` | 128 × 128 px |
 
-> You can generate them from any image editor or use a free tool like [favicon.io](https://favicon.io).
-
 ### Step 3 — Load the extension in Chrome
 
 1. Open Chrome and navigate to `chrome://extensions`
